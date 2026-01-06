@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yamada Taro | Web Designer Portfolio</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (Utility classes) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <!-- Tailwind Config for Custom Colors -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        main: '#203E50', // Dark Blue
+                        accent: '#E74C3C', // Red
+                        bg: '#ECF0F1', // Light Grey (Corrected from ECFOF1)
+                        darkBg: '#1a252f', // For Dark Mode Background
+                        darkCard: '#2c3e50', // For Dark Mode Cards
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        display: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Animation Utilities */
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered delay for children */
+        .reveal-delay-100 { transition-delay: 0.1s; }
+        .reveal-delay-200 { transition-delay: 0.2s; }
+        .reveal-delay-300 { transition-delay: 0.3s; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #ECF0F1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #203E50;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #1a252f;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #E74C3C;
+        }
+    </style>
+</head>
+<body class="bg-bg text-main dark:bg-darkBg dark:text-gray-100">
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 bg-white/90 dark:bg-darkBg/90 backdrop-blur-sm shadow-sm transition-colors duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-display font-bold tracking-tight text-main dark:text-white">
+                Y.Taro<span class="text-accent">.</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-sm font-medium hover:text-accent transition-colors">About</a>
+                <a href="#skills" class="text-sm font-medium hover:text-accent transition-colors">Skills</a>
+                <a href="#works" class="text-sm font-medium hover:text-accent transition-colors">Works</a>
+                <a href="#contact" class="px-5 py-2 bg-main text-white rounded-full hover:bg-accent transition-colors text-sm font-bold shadow-md dark:bg-gray-700 dark:hover:bg-accent">Contact</a>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="theme-toggle" class="ml-4 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon text-main dark:text-yellow-300 text-lg"></i>
+                </button>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center md:hidden gap-4">
+                <button id="theme-toggle-mobile" class="p-2" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon text-main dark:text-yellow-300"></i>
+                </button>
+                <button id="mobile-menu-btn" class="text-main dark:text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-darkCard absolute w-full shadow-lg border-t dark:border-gray-700">
+            <div class="flex flex-col px-6 py-4 space-y-4">
+                <a href="#about" class="block text-main dark:text-gray-200 hover:text-accent">About</a>
+                <a href="#skills" class="block text-main dark:text-gray-200 hover:text-accent">Skills</a>
+                <a href="#works" class="block text-main dark:text-gray-200 hover:text-accent">Works</a>
+                <a href="#contact" class="block text-accent font-bold">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Overlay / Pattern -->
+        <div class="absolute inset-0 z-0 opacity-10 dark:opacity-20 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0 100 C 20 0 50 0 100 100 Z" fill="#203E50" />
+            </svg>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="reveal">
+                <p class="text-accent font-bold tracking-widest uppercase mb-4 text-sm md:text-base">Web Designer Portfolio</p>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 text-main dark:text-white">
+                    Colors Logic,<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-main to-accent dark:from-white dark:to-accent">Designs Magic.</span>
+                </h1>
+                <p class="text-gray-600 dark:text-gray-300 text-base md:text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+                    色彩検定1級の知識と確かなコーディング技術で、<br class="hidden md:block">企業の想いを「伝わる」形に。<br>
+                    CVR向上に貢献するWebデザインを提供します。
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#works" class="px-8 py-4 bg-accent text-white rounded-full font-bold shadow-lg hover:shadow-xl hover:bg-red-600 transition-all transform hover:-translate-y-1">
+                        実績を見る
+                    </a>
+                    <a href="#contact" class="px-8 py-4 border-2 border-main dark:border-white text-main dark:text-white rounded-full font-bold hover:bg-main hover:text-white dark:hover:bg-white dark:hover:text-main transition-all">
+                        お問い合わせ
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-main dark:text-white opacity-50 hover:opacity-100">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 md:py-32 bg-white dark:bg-darkCard transition-colors">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-main dark:text-white mb-3">Who I Am</h2>
+                <div class="w-16 h-1 bg-accent mx-auto"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
+                <!-- Profile Image -->
+                <div class="w-full md:w-1/3 flex justify-center reveal reveal-delay-100">
+                    <div class="relative w-64 h-64">
+                        <div class="absolute inset-0 bg-accent rounded-full opacity-20 translate-x-3 translate-y-3"></div>
+                        <!-- Using a generic neat vector avatar placeholder -->
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4&clothing=blazerAndShirt&top=shortFlat" alt="Yamada Taro Profile" class="relative w-full h-full rounded-full object-cover border-4 border-white dark:border-darkBg shadow-lg bg-gray-100">
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="w-full md:w-2/3 reveal reveal-delay-200">
+                    <h3 class="text-2xl font-bold mb-4 text-main dark:text-white">Webデザイナー <span class="text-accent">山田 太郎</span></h3>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+                        はじめまして。都内の制作会社で2年間、コーポレートサイトや商品のLP制作に従事し、現在はフリーランスとして活動しています。
+                    </p>
+                    <div class="bg-bg dark:bg-darkBg p-6 rounded-lg mb-6 border-l-4 border-accent">
+                        <h4 class="font-bold text-main dark:text-white mb-2"><i class="fas fa-lightbulb text-accent mr-2"></i>強み：色彩心理学 × デザイン</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">
+                            ただ綺麗なだけでなく、色彩心理学に基づいた配色設計が得意です。「信頼感を与える青」「購買意欲をそそる赤」など、目的に合わせた色使いでビジネスの課題解決をサポートします。
+                        </p>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        <i class="fas fa-heart text-accent mr-2"></i>趣味：街中の看板の配色分析、カフェ巡り。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 md:py-32 bg-bg dark:bg-darkBg transition-colors">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-main dark:text-white mb-3">My Skills</h2>
+                <div class="w-16 h-1 bg-accent mx-auto"></div>
+                <p class="mt-4 text-gray-600 dark:text-gray-400">デザインから実装まで一貫して対応可能です</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Design Skills -->
+                <div class="bg-white dark:bg-darkCard p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow reveal reveal-delay-100">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-6 text-blue-600 dark:text-blue-300">
+                        <i class="fas fa-pen-nib text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-main dark:text-white">Design</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300">
+                            <i class="fab fa-figma w-6 text-center text-accent mr-2"></i> Figma (UI/Prototyping)
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-300">
+                            <i class="fab fa-adobe w-6 text-center text-accent mr-2"></i> Adobe XD / Photoshop
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-300">
+                            <i class="fas fa-swatchbook w-6 text-center text-accent mr-2"></i> 色彩設計 (色彩検定1級)
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Coding Skills -->
+                <div class="bg-white dark:bg-darkCard p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow reveal reveal-delay-200">
+                    <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mb-6 text-orange-600 dark:text-orange-300">
+                        <i class="fas fa-code text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-main dark:text-white">Coding</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300">
+                            <i class="fab fa-html5 w-6 text-center text-accent mr-2"></i> HTML5 (Semantic)
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-300">
+                            <i class="fab fa-css3-alt w-6 text-center text-accent mr-2"></i> CSS3 (Flex/Grid/Sass)
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-300">
+                            <i class="fab fa-js w-6 text-center text-accent mr-2"></i> JavaScript (ES6+)
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Other/CMS -->
+                <div class="bg-white dark:bg-darkCard p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow reveal reveal-delay-300">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-6 text-green-600 dark:text-green-300">
+                        <i class="fas fa-cogs text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-main dark:text-white">Others</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300">
+                            <i class="fab fa-wordpress w-6 text-center text-accent mr-2"></i> WordPress構築
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-300">
+                            <i class="fas fa-mobile-alt w-6 text-center text-accent mr-2"></i> レスポンシブ対応
+                        </li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-300">
+                            <i class="fas fa-universal-access w-6 text-center text-accent mr-2"></i> 基本的なWebアクセシビリティ
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Section -->
+    <section id="works" class="py-20 md:py-32 bg-white dark:bg-darkCard transition-colors">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-main dark:text-white mb-3">Portfolio</h2>
+                <div class="w-16 h-1 bg-accent mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Work Item 1 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer reveal reveal-delay-100">
+                    <div class="aspect-video bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Corporate Site" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="absolute inset-0 bg-main/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">IT企業 コーポレートサイト</h3>
+                        <p class="text-gray-300 text-sm mb-4">Design / Coding / WordPress</p>
+                        <span class="px-4 py-2 border border-white text-white text-sm rounded-full hover:bg-white hover:text-main transition-colors">詳細を見る</span>
+                    </div>
+                </div>
+
+                <!-- Work Item 2 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer reveal reveal-delay-200">
+                    <div class="aspect-video bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1556740758-90de2929e76a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cafe LP" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="absolute inset-0 bg-main/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">カフェ 新商品LP</h3>
+                        <p class="text-gray-300 text-sm mb-4">Design / Coding / Photography</p>
+                        <span class="px-4 py-2 border border-white text-white text-sm rounded-full hover:bg-white hover:text-main transition-colors">詳細を見る</span>
+                    </div>
+                </div>
+
+                <!-- Work Item 3 -->
+                <div class="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer reveal reveal-delay-300">
+                    <div class="aspect-video bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dashboard UI" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="absolute inset-0 bg-main/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">SaaS管理画面 UIデザイン</h3>
+                        <p class="text-gray-300 text-sm mb-4">UI Design / Figma</p>
+                        <span class="px-4 py-2 border border-white text-white text-sm rounded-full hover:bg-white hover:text-main transition-colors">詳細を見る</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 md:py-32 bg-main text-white relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-accent opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <!-- Text Info -->
+                <div class="lg:w-1/2 reveal">
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Get In Touch</h2>
+                    <p class="text-gray-300 mb-8 leading-relaxed text-lg">
+                        制作のご依頼、お見積もり、その他ご相談はお気軽にどうぞ。<br>
+                        2営業日以内に返信いたします。
+                    </p>
+                    
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope w-8 text-accent text-xl"></i>
+                            <span class="text-lg">hello@yamadataro-design.com</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold mb-4 border-b border-gray-600 inline-block pb-1">Follow Me</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-accent transition-colors">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-accent transition-colors">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="lg:w-1/2 reveal reveal-delay-200">
+                    <form class="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 shadow-xl" onsubmit="event.preventDefault(); alert('お問い合わせありがとうございます。\n（デモのため実際には送信されません）');">
+                        <div class="mb-6">
+                            <label for="name" class="block text-sm font-bold mb-2 text-gray-300">お名前</label>
+                            <input type="text" id="name" class="w-full bg-black/20 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors text-white placeholder-gray-500" placeholder="山田 太郎">
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-sm font-bold mb-2 text-gray-300">メールアドレス</label>
+                            <input type="email" id="email" class="w-full bg-black/20 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors text-white placeholder-gray-500" placeholder="example@email.com">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-bold mb-2 text-gray-300">お問い合わせ内容</label>
+                            <textarea id="message" rows="4" class="w-full bg-black/20 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors text-white placeholder-gray-500" placeholder="ご相談内容をご記入ください"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-accent hover:bg-red-600 text-white font-bold py-4 rounded-lg transition-colors shadow-lg transform active:scale-95">
+                            送信する <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#152a38] text-gray-400 py-8 text-center text-sm">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2024 Yamada Taro Portfolio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Dark Mode Toggle with Persistence ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const htmlElement = document.documentElement;
+        
+        // Check Local Storage or System Preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            updateIcons(true);
+        } else {
+            htmlElement.classList.remove('dark');
+            updateIcons(false);
+        }
+
+        function toggleTheme() {
+            htmlElement.classList.toggle('dark');
+            const isDark = htmlElement.classList.contains('dark');
+            localStorage.theme = isDark ? 'dark' : 'light';
+            updateIcons(isDark);
+        }
+
+        function updateIcons(isDark) {
+            const icons = document.querySelectorAll('.fa-moon, .fa-sun');
+            icons.forEach(icon => {
+                if(isDark) {
+                    icon.classList.remove('fa-moon', 'text-main');
+                    icon.classList.add('fa-sun', 'text-yellow-300');
+                } else {
+                    icon.classList.remove('fa-sun', 'text-yellow-300');
+                    icon.classList.add('fa-moon', 'text-main');
+                }
+            });
+        }
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        themeToggleMobileBtn.addEventListener('click', toggleTheme);
+
+        // --- 2. Mobile Menu Toggle ---
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- 3. Scroll Reveal Animation (Intersection Observer) ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Animate only once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+</body>
+</html>
